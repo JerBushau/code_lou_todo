@@ -1,0 +1,29 @@
+{% extends 'layout.html' %}
+
+{% load todo_extras %}
+
+{% block title_tag %}{{ todo.title }}{% endblock %}
+
+{% block body_content %}
+<div>
+  {% if before %}
+    <a href="{% url 'todos:todo_detail' pk=before.0.pk %}">Previous</a>
+  {% endif %}
+  {% if after %}
+    <a href="{% url 'todos:todo_detail' pk=after.0.pk %}">Next</a>
+  {% endif %}
+</div>
+
+
+<h1>{{ todo.title }}</h1>
+<small>
+  {{ todo.created_at }}
+</small>
+<pre>{{ todo.content }}</pre>
+
+<div class="todo-ops">
+  <a href="{% url 'todos:todo_update' pk=todo.pk %}">Edit</a>
+  <a href="{% url 'todos:todo_delete' pk=todo.pk %}">Delete</a>
+</div>
+{% endblock %}
+

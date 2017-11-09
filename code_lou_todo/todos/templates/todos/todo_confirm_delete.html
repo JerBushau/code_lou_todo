@@ -1,0 +1,11 @@
+{% extends 'layout.html' %}
+
+{% block title_tag %}Delete {{ todo.title }}{% endblock %}
+
+{% block body_content %}
+  <form action="" method="POST">
+      {% csrf_token %}
+      <p>Are you sure you want to delete "{{ todo }}"?</p>
+      <input type="submit" value="Confirm" />
+  </form>
+{% endblock %}

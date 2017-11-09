@@ -1,0 +1,11 @@
+{% extends 'layout.html' %}
+
+{% block title_tag %}Create Todo{% endblock %}
+
+{% block body_content %}
+<form method="POST" action="{% url 'todos:todo_create' %}" id="todoForm">
+  {% csrf_token %}
+  {{ form }}
+  <input type="submit">
+</form>
+{% endblock %}
