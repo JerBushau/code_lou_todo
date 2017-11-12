@@ -16,6 +16,12 @@ class TodoList(generic.ListView):
         queryset = super().get_queryset()
         return queryset.order_by('is_complete', '-created_at')
 
+    def get_context_data(self, *args, **kwargs):
+        context = super(TodoList, self).get_context_data(*args, **kwargs)
+        todos = models.Todo.objects.all()
+        context['active_todos'] = todos.filter(is_complete=False).order_by('-created_at')
+        context['complete_todos'] = todos.filter(is_complete=True).order_by('-created_at')
+        return context
 
 # genetic detail view
 class TodoDetail(generic.DetailView):
@@ -37,6 +43,9 @@ class TodoDetail(generic.DetailView):
         context['after'] = all_todos.filter(
             created_at__lt=context['todo'].created_at).order_by(
                 '-created_at')[:1]
+        #find out if todo has been edited
+        if context['todo'].created_at.replace(microsecond=0) != context['todo'].modified_at.replace(microsecond=0):
+            context['modded'] = True
         return context
 
 

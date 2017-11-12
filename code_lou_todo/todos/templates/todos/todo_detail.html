@@ -1,5 +1,6 @@
 {% extends 'layout.html' %}
 
+{% load humanize %}
 {% load todo_extras %}
 
 {% block title_tag %}{{ todo.title }}{% endblock %}
@@ -27,11 +28,17 @@
   <small>
     {{ todo.created_at }}
   </small>
-  <pre class="{% if todo.is_complete %}complete{% endif %}">{{ todo.content }}</pre>
 
+  <div class="todo-content">
+    <pre class="{% if todo.is_complete %}complete{% endif %}">{{ todo.content }}</pre>
+    {% if modded %}
+    <br>
+    <small class="modified-display">Edited {{ todo.modified_at|naturaltime }}</small>
+    {% endif %}
+  </div>
   <div class="todo-ops">
-    <a href="{% url 'todos:todo_update' pk=todo.pk %}">Edit</a>
-    <a href="{% url 'todos:todo_delete' pk=todo.pk %}">Delete</a>
+      <a href="{% url 'todos:todo_update' pk=todo.pk %}">Edit</a>
+      <a href="{% url 'todos:todo_delete' pk=todo.pk %}">Delete</a>
   </div>
 </div>
 {% endblock %}

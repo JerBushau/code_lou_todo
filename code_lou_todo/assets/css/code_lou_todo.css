@@ -11,9 +11,7 @@ body {
 
 pre {
   white-space: pre-wrap;
-  max-width: 97.4%;
-  background: #ddd;
-  padding: 0.5em;
+  margin: 0;
   font-family: 'Open Sans', sans-serif;
 }
 
@@ -49,7 +47,6 @@ footer {
   background: #444;
   align-items: center;
   justify-content: center;
-  padding: 0 5%;
 }
 
 footer {
@@ -77,6 +74,7 @@ input[type="text"], textarea {
 }
 .home-page-wrap h4 {
   text-align: center;
+  font-weight: normal;
 }
 
 .todo-list {
@@ -84,7 +82,7 @@ input[type="text"], textarea {
   margin: auto;
   width:95%;
   min-height: 80%;
-  justify-content: center;
+  justify-content: flex-start;
 }
 
 .todo-list-item {
@@ -106,10 +104,10 @@ input[type="text"], textarea {
   background: #ddd;
   padding: 0.2em;
   text-decoration: none;
+  border-bottom: 2px solid #555;
 }
 
 .todo-label {
-  text-align: center;
   text-decoration: underline;
   color: #333;
 }
@@ -147,10 +145,27 @@ input[type='submit'] {
 }
 
 .todo-detail {
-  margin: 0.5em;
+  padding: 0.5em;
   flex-direction: column;
-  overflow: wrap;
-  min-height: 80%;
+  min-height: calc(80% - 1em) ;
+}
+
+.todo-content {
+  display: flex;
+  flex-direction: column;
+  max-width: 97%;
+  background: #ddd;
+  padding: 0.5em;
+  margin: 0.5em 0;
+  border-bottom: 2px solid #555
+}
+
+.modified-display {
+  padding: 0.2em;
+  margin-left: auto;
+  background: #555;
+  color: whitesmoke;
+  text-align: center;
 }
 
 .complete {
@@ -164,6 +179,8 @@ input[type='submit'] {
 
   .todo-list {
     width: 75%;
+    justify-content: center;
+    align-items: center;
   }
   .todo-list-item {
     text-align: center;
@@ -184,7 +201,11 @@ input[type='submit'] {
 
   .todo-detail {
     width: 75%;
-    margin: auto auto 0.5em;
+    margin: auto;
+  }
+
+  .todo-label {
+    text-align: center;
   }
 }
 
@@ -192,4 +213,9 @@ input[type='submit'] {
   .todo-detail {
     max-width: 800px;
   }
+  .todo-list {
+    flex-direction: row;
+    justify-content: space-around;
+  }
+
 }
