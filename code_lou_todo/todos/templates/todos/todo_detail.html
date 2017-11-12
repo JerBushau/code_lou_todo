@@ -4,26 +4,38 @@
 
 {% block title_tag %}{{ todo.title }}{% endblock %}
 
+{% block nav_content %}
+{% include 'nav.html' %}
+{% endblock %}
+
 {% block body_content %}
-<div>
-  {% if before %}
-    <a href="{% url 'todos:todo_detail' pk=before.0.pk %}">Previous</a>
-  {% endif %}
-  {% if after %}
-    <a href="{% url 'todos:todo_detail' pk=after.0.pk %}">Next</a>
-  {% endif %}
-</div>
+<div class="todo-detail">
+  <div class="todo-nav">
+    <h1 class="{% if todo.is_complete %}complete{% endif %}">
+      {{ todo.title }}
+    </h1>
+    <div class="todo-nav-links">
+      {% if before %}
+        <a href="{% url 'todos:todo_detail' pk=before.0.pk %}">< Previous</a>
+      {% endif %}
+      {% if after %}
+        <a href="{% url 'todos:todo_detail' pk=after.0.pk %}">Next ></a>
+      {% endif %}
+    </div>
+  </div>
 
+  <small>
+    {{ todo.created_at }}
+  </small>
+  <pre class="{% if todo.is_complete %}complete{% endif %}">{{ todo.content }}</pre>
 
-<h1>{{ todo.title }}</h1>
-<small>
-  {{ todo.created_at }}
-</small>
-<pre>{{ todo.content }}</pre>
-
-<div class="todo-ops">
-  <a href="{% url 'todos:todo_update' pk=todo.pk %}">Edit</a>
-  <a href="{% url 'todos:todo_delete' pk=todo.pk %}">Delete</a>
+  <div class="todo-ops">
+    <a href="{% url 'todos:todo_update' pk=todo.pk %}">Edit</a>
+    <a href="{% url 'todos:todo_delete' pk=todo.pk %}">Delete</a>
+  </div>
 </div>
 {% endblock %}
 
+{% block footer_content %}
+{% include 'footer.html' %}
+{% endblock %}

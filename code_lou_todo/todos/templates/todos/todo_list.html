@@ -1,9 +1,31 @@
 {% extends 'layout.html' %}
 
+{% block nav_content %}
+{% include 'nav.html' %}
+{% endblock %}
+
 {% block body_content %}
+<div class="todo-list">
+  <h1 class="todo-label">ACTIVE</h1>
+  {% for todo in todo_list %}
+  {% if not todo.is_complete %}
 
-{% for todo in todo_list %}
-<h1><a href="{% url 'todos:todo_detail' pk=todo.pk %}">{{ todo.title }}</a></h1>
-{% endfor %}
+  <div class="todo-list-item">
+    <h1><a href="{% url 'todos:todo_detail' pk=todo.pk %}">{{ todo.title }}</a></h1>
+  </div>
+  {% endif %}
+  {% endfor %}
+  <h1 class="todo-label">COMPLETE</h1>
+  {% for todo in todo_list %}
+  {% if todo.is_complete %}
+  <div class="todo-list-item complete">
+    <h1><a href="{% url 'todos:todo_detail' pk=todo.pk %}">{{ todo.title }}</a></h1>
+  </div>
+  {% endif %}
+  {% endfor %}
+</div>
+{% endblock %}
 
+{% block footer_content %}
+{% include 'footer.html' %}
 {% endblock %}

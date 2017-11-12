@@ -11,18 +11,11 @@
     <link rel="stylesheet" href="{% static 'css/code_lou_todo.css' %}">
 </head>
   <body>
-
-    <nav>
-      {% if request.get_full_path != '/todos/' %}
-        <a href="{% url 'todos:todo_list' %}">List</a>
-      {% endif %}
-
-      {% if request.get_full_path != '/todo/create/' %}
-        <a href="{% url 'todos:todo_create' %}">Create todo</a>
-      {% endif %}
-    </nav>
-
+    {% block nav_content%}
+    {% endblock %}
     {% block body_content %}
+    {% endblock %}
+    {% block footer_content %}
     {% endblock %}
   </body>
 </html>

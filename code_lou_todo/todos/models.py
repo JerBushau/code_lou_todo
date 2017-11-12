@@ -6,6 +6,7 @@ from django.db import models
 class Todo(models.Model):
     title = models.CharField(max_length=100, unique=True)
     content = models.TextField()
+    is_complete = models.BooleanField(default=0)
     created_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):

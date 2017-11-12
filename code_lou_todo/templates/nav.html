@@ -1,0 +1,9 @@
+<nav>
+    {% if request.get_full_path != '/todos/' %}
+    <a href="{% url 'todos:todo_list' %}">Todo List</a>
+    {% endif %}
+
+    {% if request.get_full_path != '/todo/create/' %}
+    <a href="{% url 'todos:todo_create' %}">Create Todo</a>
+    {% endif %}
+</nav>

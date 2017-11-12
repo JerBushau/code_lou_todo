@@ -2,10 +2,20 @@
 
 {% block title_tag %}Delete {{ todo.title }}{% endblock %}
 
+{% block nav_content %}
+{% include 'nav.html' %}
+{% endblock %}
+
 {% block body_content %}
+<div class="form-wrap">
   <form action="" method="POST">
       {% csrf_token %}
       <p>Are you sure you want to delete "{{ todo }}"?</p>
       <input type="submit" value="Confirm" />
   </form>
+</div>
+{% endblock %}
+
+{% block footer_content %}
+{% include 'footer.html' %}
 {% endblock %}

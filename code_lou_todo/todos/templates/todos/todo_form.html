@@ -2,10 +2,21 @@
 
 {% block title_tag %}Create Todo{% endblock %}
 
+{% block nav_content %}
+{% include 'nav.html' %}
+{% endblock %}
+
 {% block body_content %}
-<form method="POST" action="{% url 'todos:todo_create' %}" id="todoForm">
-  {% csrf_token %}
-  {{ form }}
-  <input type="submit">
-</form>
+<div class="form-wrap">
+  <form method="POST" action="{% url 'todos:todo_create' %}" id="todoForm">
+    {% csrf_token %}
+    {# to put form ele's in <p>'s use form.as_p there is also form.as_ul #}
+    {{ form }}
+    <input type="submit">
+  </form>
+</div>
+{% endblock %}
+
+{% block footer_content %}
+{% include 'footer.html' %}
 {% endblock %}

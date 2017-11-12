@@ -14,7 +14,7 @@ class TodoList(generic.ListView):
 
     def get_queryset(self):
         queryset = super().get_queryset()
-        return queryset.order_by('-created_at')
+        return queryset.order_by('is_complete', '-created_at')
 
 
 # genetic detail view
@@ -26,10 +26,17 @@ class TodoDetail(generic.DetailView):
     def get_context_data(self, *args, **kwargs):
         context = super(TodoDetail, self).get_context_data(*args, **kwargs)
         # figure out how to use annotate!!!! seems like it would help here
-        context['before'] = models.Todo.objects.filter(
-            created_at__gt=context['todo'].created_at)[:1]
-        context['after'] = models.Todo.objects.filter(
-            created_at__lt=context['todo'].created_at)[:1]
+        if context['todo'].is_complete == True:
+            all_todos = models.Todo.objects.all().filter(is_complete=True)
+        else:
+            all_todos = models.Todo.objects.all().filter(is_complete=False)
+        context['todo'].content = context['todo'].content.strip()
+        context['before'] = all_todos.filter(
+            created_at__gt=context['todo'].created_at).order_by(
+                'created_at')[:1]
+        context['after'] = all_todos.filter(
+            created_at__lt=context['todo'].created_at).order_by(
+                '-created_at')[:1]
         return context
 
 
@@ -42,7 +49,7 @@ class TodoCreate(generic.CreateView):
 # generic update view
 class TodoUpdate(generic.UpdateView):
     model = models.Todo
-    fields = ['title', 'content']
+    fields = ['title', 'content', 'is_complete']
     template_name_suffix = '_update_form'
 
 
