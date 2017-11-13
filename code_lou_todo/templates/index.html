@@ -5,6 +5,14 @@
   <h1>Generic Todo App!</h1>
   <h4>Created by: Jeremiah Bushau<br>with Django, a Python web framework</h4>
 
-  {% include 'nav.html' %}
+  <nav class="welcome-nav">
+    {% if request.get_full_path != '/todos/' %}
+    <a href="{% url 'todos:todo_list' %}">Todo List</a>
+    {% endif %}
+
+    {% if request.get_full_path != '/todo/create/' %}
+    <a href="{% url 'todos:todo_create' %}">Create Todo</a>
+    {% endif %}
+  </nav>
 </div>
 {% endblock %}

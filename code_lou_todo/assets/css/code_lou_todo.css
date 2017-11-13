@@ -51,7 +51,7 @@ footer {
 
 nav {
   background: url('../imgs/goma_chan.png') no-repeat, #555;
-  background-position: 105%;
+  background-position: 100% 90%;
   background-size: 5em;
 }
 
@@ -77,10 +77,16 @@ input[type="text"], textarea {
   height: 100%;
   align-items: center;
   justify-content: center;
+  background: no-repeat 80% 95% url('../imgs/goma_chan.png');
+  background-size: 15em;
 }
 .home-page-wrap h4 {
   text-align: center;
   font-weight: normal;
+}
+
+.welcome-nav {
+  background: #555;
 }
 
 .todo-list {
