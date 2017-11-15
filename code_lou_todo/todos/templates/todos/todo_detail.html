@@ -22,6 +22,9 @@
       {% if after %}
         <a href="{% url 'todos:todo_detail' pk=after.0.pk %}">Next ></a>
       {% endif %}
+      {% if not after %}
+      <a href="" class="link-placeholder"></a>
+      {% endif %}
     </div>
   </div>
 

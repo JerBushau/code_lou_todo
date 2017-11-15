@@ -5,7 +5,7 @@
   <h1>Generic Todo App!</h1>
   <h4>Created by: Jeremiah Bushau<br>with Django, a Python web framework</h4>
 
-  <nav class="welcome-nav">
+  <nav class="home-page-nav">
     {% if request.get_full_path != '/todos/' %}
     <a href="{% url 'todos:todo_list' %}">Todo List</a>
     {% endif %}

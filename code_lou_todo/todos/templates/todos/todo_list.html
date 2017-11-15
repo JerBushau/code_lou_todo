@@ -6,6 +6,9 @@
 
 {% block body_content %}
 <div class="todo-list">
+  {% if not active_todos and not complete_todos %}
+  <h1>Click 'Create Todo' to get started!</h1>
+  {% endif %}
   {% if active_todos %}
   <div class="active-todos">
     <h1 class="todo-label">ACTIVE</h1>
@@ -20,8 +23,8 @@
   <div class="complete-todos">
     <h1 class="todo-label">COMPLETE</h1>
     {% for todo in complete_todos %}
-    <div class="todo-list-item complete">
-      <h1><a href="{% url 'todos:todo_detail' pk=todo.pk %}">{{ todo.title }}</a></h1>
+    <div class="todo-list-item">
+      <h1><a href="{% url 'todos:todo_detail' pk=todo.pk %}" class="complete">{{ todo.title }}</a></h1>
     </div>
     {% endfor %}
   </div>
