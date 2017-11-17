@@ -13,6 +13,7 @@ class Todo(models.Model):
     def __str__(self):
         return self.title
 
+    #  tells Django how to calculate the canonical URL for a Todo
     def get_absolute_url(self):
         return reverse("todos:todo_detail",
                        kwargs={ "pk": self.pk })

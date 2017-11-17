@@ -19,16 +19,19 @@ class TodoList(generic.ListView):
     def get_context_data(self, *args, **kwargs):
         context = super(TodoList, self).get_context_data(*args, **kwargs)
         todos = models.Todo.objects.all()
-        context['active_todos'] = todos.filter(is_complete=False).order_by('-created_at')
-        context['complete_todos'] = todos.filter(is_complete=True).order_by('-created_at')
+        context['active_todos'] = todos.filter(
+            is_complete=False).order_by('-created_at')
+        context['complete_todos'] = todos.filter(
+            is_complete=True).order_by('-created_at')
         return context
+
 
 # genetic detail view
 class TodoDetail(generic.DetailView):
     model = models.Todo
 
     # in addition to the individual todo also grab the others for the nav
-    # get just entries create just before and just after
+    # get just entries created just before and just after
     def get_context_data(self, *args, **kwargs):
         context = super(TodoDetail, self).get_context_data(*args, **kwargs)
 
@@ -45,7 +48,8 @@ class TodoDetail(generic.DetailView):
             created_at__lt=context['todo'].created_at
         ).order_by('-created_at')[:1]
 
-        if context['todo'].created_at.replace(microsecond=0) != context['todo'].modified_at.replace(microsecond=0):
+        if (context['todo'].created_at.replace(microsecond=0) !=
+        context['todo'].modified_at.replace(microsecond=0)):
             context['modded'] = True
         return context
 
